@@ -3,6 +3,7 @@ package com.example.coelh.myapplication;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 
 /**
@@ -19,7 +20,7 @@ public class SnakeThread extends Thread{
     private Paint foodPaint;
     private Paint board;
 
-    private int radius =70;
+    private int radius =7;
 
     public SnakeThread(SurfaceHolder holder){
         this.holder =holder;
@@ -62,6 +63,11 @@ public class SnakeThread extends Thread{
         }
 
     }
+    public void canvasClicked(MotionEvent event){
+        int x = (int)((event.getX()-radius)/(2*radius));
+        int y = (int)((event.getY()-radius)/(2*radius));
+        snake.changeDirection(x,y);
+    }
     public void drawGamesElements(Canvas canvas){
         int dimX = canvas.getWidth()/(2*radius);
         int dimY = canvas.getHeight()/(2*radius);
@@ -98,6 +104,7 @@ public class SnakeThread extends Thread{
                 foodPaint
         );
     }
+
     public void setRunning(boolean running){
         threadIsRunning = running;
     }

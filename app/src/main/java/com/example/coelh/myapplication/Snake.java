@@ -50,6 +50,16 @@ public class Snake {
                 direction=0;
         }
     }
+    public boolean isSnakeNode(Snake.SnakeNode node){
+        SnakeNode pos = tail;
+        while(pos != null){
+            if(node == pos){
+                return true;
+            }
+            pos = pos.getPrevious();
+        }
+        return false;
+    }
     public boolean move(){
         int topX = head.x;
         int topY = head.y;
@@ -90,6 +100,10 @@ public class Snake {
         int y = (int)(Math.random() *dimY);
 
         food.changePosition(x,y);
+
+        if(isSnakeNode(food)==true){
+            randomFood();
+        }
     }
     class SnakeNode{
         public int x;
